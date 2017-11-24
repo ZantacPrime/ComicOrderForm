@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicOrderForm.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ComicOrderForm {
+namespace ComicOrderForm.Views {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        public MainWindow() {
+    public partial class OrdersView : Window {
+        public OrdersView() {
+            var data = new OrdersViewModel(true);
+            this.Content = data;
             InitializeComponent();
         }
     }

@@ -2,8 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ComicOrderForm"
-             StartupUri="MainWindow.xaml">
+             xmlns:views="clr-namespace:ComicOrderForm.Views"
+             StartupUri="views\OrdersView.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
     </Application.Resources>
 </Application>
+
+    

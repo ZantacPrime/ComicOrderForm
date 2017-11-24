@@ -28,5 +28,9 @@ namespace ComicOrderForm.Models {
                                                 IsLenny BOOLEAN
                                             )";
         }
+
+        public override string ToString() {
+            return $"{FirstName} {LastName}";
+        }
     }
 }
