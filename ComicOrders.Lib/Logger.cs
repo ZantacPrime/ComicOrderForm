@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace ComicOrderForm.Helpers {
+namespace ComicOrders.Lib.Helpers {
     public static class Logger {
         private static bool _isInitialized { get; set; }
         private static FileInfo _log {get;set;}

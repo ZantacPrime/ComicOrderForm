@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dapper.Contrib.Extensions;
 
-namespace ComicOrderForm.Models {
+namespace ComicOrders.DB.Models {
     [Table("ComicSeries")]
     public class ComicSeriesModel {
         [Key]

@@ -1,7 +1,7 @@
 ﻿using Dapper.Contrib.Extensions;
 using System;
 
-namespace ComicOrderForm.Models {
+namespace ComicOrders.DB.Models {
     [Table("Comics")]
     public class ComicModel {
         [Key]

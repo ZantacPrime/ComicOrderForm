@@ -1,10 +1,9 @@
-﻿using ComicOrderForm.Helpers;
-using Dapper;
+﻿using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
-namespace ComicOrderForm.Models {
+namespace ComicOrders.DB.Models {
     public class OrderDisplayModel {
         public OrderModel Order { get; set; }
         public CustomerModel Customer { get; set; }

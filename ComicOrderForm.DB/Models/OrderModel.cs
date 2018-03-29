@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicOrderForm.Models {
+namespace ComicOrders.DB.Models {
     [Table("Orders")]
     public class OrderModel {
         [Key]

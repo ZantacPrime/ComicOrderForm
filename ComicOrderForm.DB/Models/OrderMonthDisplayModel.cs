@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicOrderForm.Models {
+namespace ComicOrders.DB.Models {
     public class OrderMonthDisplayModel {
         public DateTime OrderMonth { get; set; }
 
