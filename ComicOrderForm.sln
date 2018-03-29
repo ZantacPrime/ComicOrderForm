@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicOrders.Form", "ComicOrderForm\ComicOrders.Form.csproj", "{583301E2-6D9F-48B1-A1DE-A7A3701CE436}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicOrders.WPF", "ComicOrderForm\ComicOrders.WPF.csproj", "{583301E2-6D9F-48B1-A1DE-A7A3701CE436}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicOrders.DB", "ComicOrderForm.DB\ComicOrders.DB.csproj", "{41952AC3-1946-4491-B64F-37CE2E658367}"
 EndProject

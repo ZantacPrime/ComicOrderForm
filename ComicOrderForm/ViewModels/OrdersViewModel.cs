@@ -1,5 +1,5 @@
-﻿using ComicOrderForm.Helpers;
-using ComicOrderForm.Models;
+﻿using ComicOrders.DB;
+using ComicOrders.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicOrderForm.ViewModels {
+namespace ComicOrders.WPF.ViewModels {
     public class OrdersViewModel : BaseViewModel {
 
         #region Properties
