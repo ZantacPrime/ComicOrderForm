@@ -1,6 +1,7 @@
 ﻿using ComicOrders.DB.Models;
 using ComicOrders.Lib.Helpers;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -14,8 +15,10 @@ namespace ComicOrders.DB {
         public static string DbDirectory { get { return $@"{AppDomain.CurrentDomain.BaseDirectory}\data\"; } }
         public static string DbPath { get { return $@"{DbDirectory}\comicorders.db"; } }
 
-        internal static T GetById<T>(long orderId) {
-            throw new NotImplementedException();
+        public static T GetById<T>(long Id) where T:class {
+            using(var cn = new SQLiteConnection(BaseConnectionString)) {
+                return cn.Get<T>(Id);
+            }
         }
 
         public static string BaseConnectionString { get { return $@"{DbPath};Version=3;"; } }
@@ -44,14 +47,14 @@ namespace ComicOrders.DB {
             return true;
         }
 
-        public static IEnumerable<OrderMonthDisplayModel> GetOrderMonths() {
-            var dates = new List<OrderMonthDisplayModel>();
+        public static IEnumerable<DateTime> GetOrderMonths() {
+            var dates = new List<DateTime>();
             using(var cn = new SQLiteConnection(ConnectionString)) {
-                foreach(var values in cn.Query<OrderModel>("SELECT DISTINCT OrderYear, OrderMonth FROM Orders")) {
-                    dates.Add(new OrderMonthDisplayModel(values));
+                foreach(var orderMonths in cn.Query<DateTime>("SELECT DISTINCT Date(OrderMonth, '%Y-%m') FROM Orders")) {
+                    dates.Add(orderMonths);
                 }
             }
-            return dates.OrderBy(x => x.OrderMonth);
+            return dates.OrderBy(x => x);
         }
 
         public static dynamic AddOrders(ICollection<CustomerModel> Customers, ICollection<ComicModel> Comics) {

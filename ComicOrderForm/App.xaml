@@ -1,8 +1,8 @@
-﻿<Application x:Class="ComicOrderForm.App"
+﻿<Application x:Class="ComicOrders.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ComicOrderForm"
-             xmlns:views="clr-namespace:ComicOrderForm.Views"
+             xmlns:local="clr-namespace:ComicOrders"
+             xmlns:views="clr-namespace:ComicOrders.WPF.Views"
              StartupUri="views\OrdersView.xaml">
     <Application.Resources>
         <Style TargetType="{x:Type Button}">

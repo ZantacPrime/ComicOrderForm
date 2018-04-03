@@ -27,5 +27,9 @@ namespace ComicOrders.DB.Models {
                                             FOREIGN KEY(CustomerId) REFERENCES Customers(Id)
             )";
         }
+
+        public override string ToString() {
+            return OrderMonth.ToString("MMMM yyyy");
+        }
     }
 }

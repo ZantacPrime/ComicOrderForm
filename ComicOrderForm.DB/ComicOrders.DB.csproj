@@ -56,9 +56,7 @@
     <Compile Include="Models\ComicModel.cs" />
     <Compile Include="Models\ComicSeriesModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
-    <Compile Include="Models\OrderDisplayModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
-    <Compile Include="Models\OrderMonthDisplayModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

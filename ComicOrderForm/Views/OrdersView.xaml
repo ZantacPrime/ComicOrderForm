@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ComicOrderForm"
+        xmlns:local="clr-namespace:ComicOrders.WPF"
         mc:Ignorable="d"
         Title="Comic Orders" Height="350" Width="525">
     <DockPanel>
         <ScrollViewer>
             <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Margin="2">
-                <ComboBox Margin="2" ItemsSource="{Binding OrderDates}" SelectedItem="{Binding SelectedItem}"/>
+                <ComboBox Margin="2" ItemsSource="{Binding OrderDates}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="OrderMonth"/>
                 <Button Content="View Customers"/>
                 <Button Content="View Comics"/>
                 <Button Content="Add Order"/>

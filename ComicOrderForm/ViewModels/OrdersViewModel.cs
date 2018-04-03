@@ -1,5 +1,6 @@
 ﻿using ComicOrders.DB;
 using ComicOrders.DB.Models;
+using ComicOrders.WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,20 +21,11 @@ namespace ComicOrders.WPF.ViewModels {
             }
         }
 
-        private ObservableCollection<OrderMonthDisplayModel> _orderMonths;
-        public ObservableCollection<OrderMonthDisplayModel> OrderMonths {
-            get { return _orderMonths; }
+        private OrderModel _selectedOrder;
+        public OrderModel SelectedMonth {
+            get { return _selectedOrder; }
             set {
-                _orderMonths = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private OrderMonthDisplayModel _selectedMonth;
-        public OrderMonthDisplayModel SelectedMonth {
-            get { return _selectedMonth; }
-            set {
-                _selectedMonth = value;
+                _selectedOrder = value;
                 OnPropertyChanged();
             }
         }
@@ -54,7 +46,8 @@ namespace ComicOrders.WPF.ViewModels {
         }
 
         public void PopulateDates() {
-            OrderMonths = new ObservableCollection<OrderMonthDisplayModel>(DbUtil.GetOrderMonths().ToList());
+
+            //OrderMonths = new ObservableCollection<OrderMonthDisplayModel>(DbUtil.GetOrderMonths().ToList());
             foreach(var date in DbUtil.GetOrderMonths()) {
 
             }

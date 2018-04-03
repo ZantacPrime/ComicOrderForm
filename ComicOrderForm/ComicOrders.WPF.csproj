@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{583301E2-6D9F-48B1-A1DE-A7A3701CE436}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ComicOrderForm</RootNamespace>
-    <AssemblyName>ComicOrderForm</AssemblyName>
+    <RootNamespace>ComicOrders</RootNamespace>
+    <AssemblyName>ComicOrders</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -75,6 +75,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\Converters\OrderToDateConverter.cs" />
+    <Compile Include="Models\OrderDisplayModel.cs" />
     <Compile Include="ViewModels\BaseView.cs" />
     <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="Views\OrdersView.xaml.cs">

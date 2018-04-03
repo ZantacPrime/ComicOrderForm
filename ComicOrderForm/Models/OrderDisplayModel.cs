@@ -1,9 +1,11 @@
-﻿using Dapper;
+﻿using ComicOrders.DB;
+using ComicOrders.DB.Models;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
-namespace ComicOrders.DB.Models {
+namespace ComicOrders.WPF.Models {
     public class OrderDisplayModel {
         public OrderModel Order { get; set; }
         public CustomerModel Customer { get; set; }
