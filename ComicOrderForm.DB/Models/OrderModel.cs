@@ -4,6 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ComicOrders.DB.Models;
+using ComicOrders.Lib.Helpers;
+using Dapper;
+using Dapper.Contrib.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ComicOrders.DB.Models {
     [Table("Orders")]
@@ -28,8 +38,21 @@ namespace ComicOrders.DB.Models {
             )";
         }
 
-        public override string ToString() {
-            return OrderMonth.ToString("MMMM yyyy");
+        //public override string ToString() {
+        //    return OrderMonth.ToString("MMMM yyyy");
+        //}
+
+        /// <summary>
+        /// Gets all orders placed in a given month and year.
+        /// </summary>
+        /// <param name="OrderMonth">The month and year of the order.</param>
+        /// <returns>The orders placed in the given month and year.</returns>
+        public static IEnumerable<OrderModel> GetOrdersByOrderMonth(DateTime OrderMonth) {
+            using(var cn = DbUtil.GetDefaultConnection()) {
+                var first = new DateTime(OrderMonth.Year, OrderMonth.Month, 1);
+                var last = first.AddMonths(1).AddDays(-1);
+                return cn.Query<OrderModel>("SELECT * FROM Orders WHERE OrderMonth between @first AND @last", new { first, last });
+            }
         }
     }
 }

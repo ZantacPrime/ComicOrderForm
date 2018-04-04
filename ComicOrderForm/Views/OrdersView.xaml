@@ -9,7 +9,13 @@
     <DockPanel>
         <ScrollViewer>
             <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Margin="2">
-                <ComboBox Margin="2" ItemsSource="{Binding OrderDates}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="OrderMonth"/>
+                <ComboBox Margin="2" ItemsSource="{Binding OrderDates}" SelectedItem="{Binding SelectedItem}" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource PrettyOrderMonthConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Button Content="View Customers"/>
                 <Button Content="View Comics"/>
                 <Button Content="Add Order"/>

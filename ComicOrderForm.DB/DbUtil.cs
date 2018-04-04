@@ -32,7 +32,7 @@ namespace ComicOrders.DB {
             }
 
             try {
-                using(var cn = new SQLiteConnection(BaseConnectionString)) {
+                using(var cn = GetDefaultConnection()) {
                     cn.SetPassword(PASSWORD);
                     cn.Query(ComicModel.GetTableDefinition());
                     cn.Query(CustomerModel.GetTableDefinition());
@@ -49,7 +49,7 @@ namespace ComicOrders.DB {
 
         public static IEnumerable<DateTime> GetOrderMonths() {
             var dates = new List<DateTime>();
-            using(var cn = new SQLiteConnection(ConnectionString)) {
+            using(var cn = GetDefaultConnection()) {
                 foreach(var orderMonths in cn.Query<DateTime>("SELECT DISTINCT Date(OrderMonth, '%Y-%m') FROM Orders")) {
                     dates.Add(orderMonths);
                 }
@@ -59,6 +59,10 @@ namespace ComicOrders.DB {
 
         public static dynamic AddOrders(ICollection<CustomerModel> Customers, ICollection<ComicModel> Comics) {
             return null;
+        }
+
+        public static SQLiteConnection GetDefaultConnection() {
+            return new SQLiteConnection(ConnectionString);
         }
     }
 }

@@ -29,6 +29,16 @@ namespace ComicOrders.WPF.ViewModels {
                 OnPropertyChanged();
             }
         }
+
+
+        private ObservableCollection<DateTime> _orderMonths;
+        public ObservableCollection<DateTime> OrderMonths {
+            get { return _orderMonths; }
+            set {
+                _orderMonths = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         public OrdersViewModel() {  }
@@ -46,7 +56,7 @@ namespace ComicOrders.WPF.ViewModels {
         }
 
         public void PopulateDates() {
-
+            OrderMonths = new ObservableCollection<DateTime>(DbUtil.GetOrderMonths().OrderBy(o => o).ToList());
             //OrderMonths = new ObservableCollection<OrderMonthDisplayModel>(DbUtil.GetOrderMonths().ToList());
             foreach(var date in DbUtil.GetOrderMonths()) {
 
