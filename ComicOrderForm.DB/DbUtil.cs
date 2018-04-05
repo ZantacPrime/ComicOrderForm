@@ -16,24 +16,45 @@ namespace ComicOrders.DB {
         public static string DbPath { get { return $@"{DbDirectory}\comicorders.db"; } }
 
         public static T GetById<T>(long Id) where T:class {
-            using(var cn = new SQLiteConnection(BaseConnectionString)) {
+            using(var cn = new SQLiteConnection(ConnectionString)) {
                 return cn.Get<T>(Id);
             }
         }
 
-        public static string BaseConnectionString { get { return $@"{DbPath};Version=3;"; } }
-        public static string ConnectionString { get { return $"{BaseConnectionString};password={PASSWORD}"; } }
+        //public static string BaseConnectionString { get { return $@"{DbPath};Version=3;"; } }
+        //private static string _connectionString;
+        private static SQLiteConnectionStringBuilder connBuilder { get;  set; }
+        public static string ConnectionString { get {
+                if(connBuilder == null)
+                    initializeConnectionStringBuilder();
+                return connBuilder.ConnectionString; } }
         public const string PASSWORD = "pickles";
 
+        private static void initializeConnectionStringBuilder() {
+            connBuilder = new SQLiteConnectionStringBuilder();
+            connBuilder.DataSource = DbPath;
+#if !DEBUG
+            connBuilder.Password = PASSWORD;
+#endif
+            connBuilder.FailIfMissing = true;
+            connBuilder.ReadOnly = false;
+            connBuilder.Version = 3;
+        }
+
+        public static bool DbExists() {
+            return System.IO.File.Exists(DbPath);
+        }
+
         public static bool InitialzieDatabase() {
+            System.IO.Directory.CreateDirectory(DbDirectory);
             SQLiteConnection.CreateFile(DbPath);
-            if(!System.IO.File.Exists(DbPath)) {
+            if(!DbExists()) {
                 throw new Exception("Database could not be initialized.Something very wrong has happened.Contact Ian.");
             }
 
             try {
                 using(var cn = GetDefaultConnection()) {
-                    cn.SetPassword(PASSWORD);
+                    //cn.SetPassword(PASSWORD);
                     cn.Query(ComicModel.GetTableDefinition());
                     cn.Query(CustomerModel.GetTableDefinition());
                     cn.Query(ComicSeriesModel.GetTableDefinition());

@@ -8,17 +8,25 @@ using System.IO;
 namespace ComicOrders.Lib.Helpers {
     public static class Logger {
         private static bool _isInitialized { get; set; }
-        private static FileInfo _log {get;set;}
+        private static FileInfo _log;
+        private static FileInfo log {
+            get {
+                if(_log == null)
+                    Initialize();
+                return _log;
+            }
+        }
 
         public static void Initialize() {
             if(!_isInitialized) {
-                _log = new FileInfo($@"{AppDomain.CurrentDomain.BaseDirectory}\logs\order_log_{DateTime.Now.ToString("yyyy_MM_dd")}");
+                Directory.CreateDirectory($@"{AppDomain.CurrentDomain.BaseDirectory}\logs");
+                _log = new FileInfo($@"{AppDomain.CurrentDomain.BaseDirectory}\logs\order_log_{DateTime.Now.ToString("yyyy_MM_dd")}.txt");
                 _isInitialized = true;
             }
         }
 
         public static void Log(string Message, Dictionary<string, object> Params = null) {
-            using(var writer = _log.AppendText()) {
+            using(var writer = log.AppendText()) {
                 writer.WriteLine($"{DateTime.Now.ToString("yyyyMMddHHmmss")} - {Message}{(Params != null ? ":" : "")}");
                 if(Params != null) {
                     foreach(var param in Params) {
@@ -46,7 +54,7 @@ namespace ComicOrders.Lib.Helpers {
                 }
                 inner = inner.InnerException;
             }
-            if(Params!= null) {
+            if(Params != null) {
                 foreach(var param in Params) {
                     objs.Add(param.Key, param.Value);
                 }

@@ -22,7 +22,7 @@ namespace ComicOrders.WPF.ViewModels {
         }
 
         private OrderModel _selectedOrder;
-        public OrderModel SelectedMonth {
+        public OrderModel SelectedOrder {
             get { return _selectedOrder; }
             set {
                 _selectedOrder = value;
@@ -30,12 +30,20 @@ namespace ComicOrders.WPF.ViewModels {
             }
         }
 
-
         private ObservableCollection<DateTime> _orderMonths;
         public ObservableCollection<DateTime> OrderMonths {
             get { return _orderMonths; }
             set {
                 _orderMonths = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime _selectedMonth;
+        public DateTime SelectedMonth {
+            get { return _selectedMonth; }
+            set {
+                _selectedMonth = value;
                 OnPropertyChanged();
             }
         }
@@ -47,7 +55,6 @@ namespace ComicOrders.WPF.ViewModels {
                 this.Initialize();
             }
         }
-
 
         public void Initialize() {
             PopulateDates();
@@ -64,7 +71,7 @@ namespace ComicOrders.WPF.ViewModels {
         }
 
         public void PopulateOrders() {
-            Orders = new ObservableCollection<OrderDisplayModel>(OrderDisplayModel.GetOrders(SelectedMonth.OrderMonth).ToList());
+            //Orders = new ObservableCollection<OrderDisplayModel>(OrderDisplayModel.GetOrders(SelectedMonth.OrderMonth).ToList());
         }
     }
 }
