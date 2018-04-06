@@ -25,8 +25,15 @@
         </ScrollViewer>
         <DataGrid ItemsSource="{Binding Orders}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comic" Binding="{Binding Comic}" />
-                <DataGridTextColumn Header="Customer" Binding="{Binding Customer}" />
+                <DataGridTextColumn Header="Comic" Binding="{Binding Comic.Title}" />
+                <DataGridTextColumn Header="Customer" >
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}}">
+                            <Binding Path="FirstName"/>
+                            <Binding Path="LastName"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

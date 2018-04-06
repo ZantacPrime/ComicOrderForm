@@ -14,7 +14,7 @@ namespace ComicOrders.WPF.ViewModels {
         #region Properties
         private ObservableCollection<OrderDisplayModel> _orders;
         public ObservableCollection<OrderDisplayModel> Orders {
-            get { return _orders; }
+            get => _orders;
             set {
                 _orders = value;
                 OnPropertyChanged();
@@ -23,7 +23,7 @@ namespace ComicOrders.WPF.ViewModels {
 
         private OrderModel _selectedOrder;
         public OrderModel SelectedOrder {
-            get { return _selectedOrder; }
+            get => _selectedOrder;
             set {
                 _selectedOrder = value;
                 OnPropertyChanged();
@@ -32,7 +32,7 @@ namespace ComicOrders.WPF.ViewModels {
 
         private ObservableCollection<DateTime> _orderMonths;
         public ObservableCollection<DateTime> OrderMonths {
-            get { return _orderMonths; }
+            get => _orderMonths;
             set {
                 _orderMonths = value;
                 OnPropertyChanged();
@@ -41,7 +41,7 @@ namespace ComicOrders.WPF.ViewModels {
 
         private DateTime _selectedMonth;
         public DateTime SelectedMonth {
-            get { return _selectedMonth; }
+            get => _selectedMonth;
             set {
                 _selectedMonth = value;
                 OnPropertyChanged();
@@ -64,14 +64,11 @@ namespace ComicOrders.WPF.ViewModels {
 
         public void PopulateDates() {
             OrderMonths = new ObservableCollection<DateTime>(DbUtil.GetOrderMonths().OrderBy(o => o).ToList());
-            //OrderMonths = new ObservableCollection<OrderMonthDisplayModel>(DbUtil.GetOrderMonths().ToList());
-            foreach(var date in DbUtil.GetOrderMonths()) {
-
-            }
+            SelectedMonth = OrderMonths.FirstOrDefault();
         }
 
         public void PopulateOrders() {
-            //Orders = new ObservableCollection<OrderDisplayModel>(OrderDisplayModel.GetOrders(SelectedMonth.OrderMonth).ToList());
+            Orders = new ObservableCollection<OrderDisplayModel>(OrderDisplayModel.GetOrders(SelectedMonth).OrderBy(o => o.Comic.Title).ThenBy(o => o.Customer.FirstName));
         }
     }
 }

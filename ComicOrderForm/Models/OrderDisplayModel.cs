@@ -31,7 +31,7 @@ namespace ComicOrders.WPF.Models {
         public static ICollection<OrderDisplayModel> GetOrders(DateTime OrderMonth) {
             var displayOrders = new List<OrderDisplayModel>();
             using(var cn = new SQLiteConnection(DbUtil.ConnectionString)) {
-                var orders = cn.Query<OrderModel>("SELECT * FROM Orders WHERE OrderMonth = @month AND OrderYear = @year", new { month = OrderMonth.Month, year = OrderMonth.Year });
+                var orders = cn.Query<OrderModel>("SELECT * FROM Orders WHERE Date(OrderMonth, '%Y %m') = Date(@month, '%Y %m')", new { month = OrderMonth.Month, year = OrderMonth.Year });
                 foreach(var order in orders) {
                     displayOrders.Add(new OrderDisplayModel(order));
                 }
