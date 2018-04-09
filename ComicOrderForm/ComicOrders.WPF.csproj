@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{583301E2-6D9F-48B1-A1DE-A7A3701CE436}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ComicOrders</RootNamespace>
+    <RootNamespace>ComicOrders.WPF</RootNamespace>
     <AssemblyName>ComicOrders</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -67,6 +67,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\ComicsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\OrdersView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,7 +90,19 @@
     <Compile Include="Helpers\Converters\OrderToDateConverter.cs" />
     <Compile Include="Models\OrderDisplayModel.cs" />
     <Compile Include="ViewModels\BaseView.cs" />
+    <Compile Include="ViewModels\ComicsViewModel.cs" />
+    <Compile Include="ViewModels\CustomerAddEditViewModel.cs" />
+    <Compile Include="ViewModels\CustomersViewModel.cs" />
     <Compile Include="ViewModels\OrdersViewModel.cs" />
+    <Compile Include="Views\ComicsView.xaml.cs">
+      <DependentUpon>ComicsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerAddEdit.xaml.cs">
+      <DependentUpon>CustomerAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomersView.xaml.cs">
+      <DependentUpon>CustomersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OrdersView.xaml.cs">
       <DependentUpon>OrdersView.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -20,7 +20,7 @@ namespace ComicOrders.DB.Models {
         }
 
         public static string GetTableDefinition() {
-            return @"CREATE TABLE Comics(Id PRIMARY KEY,
+            return @"CREATE TABLE Comics(Id INTEGER PRIMARY KEY,
                                             Title TEXT,
                                             DiamondCode TEXT NOT NULL,
                                             IssueNumber TEXT,

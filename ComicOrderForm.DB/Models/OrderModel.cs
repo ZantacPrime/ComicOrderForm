@@ -1,19 +1,8 @@
 ﻿using Dapper.Contrib.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ComicOrders.DB.Models;
-using ComicOrders.Lib.Helpers;
 using Dapper;
-using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ComicOrders.DB.Models {
     [Table("Orders")]

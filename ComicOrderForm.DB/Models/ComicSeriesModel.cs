@@ -12,7 +12,7 @@ namespace ComicOrders.DB.Models {
         }
 
         public static string GetTableDefinition() {
-            return @"CREATE TABLE ComicSeries (Id PRIMARY KEY,
+            return @"CREATE TABLE ComicSeries (Id INTEGER PRIMARY KEY,
                                                 SeriesName TEXT
                                               )";
         }
