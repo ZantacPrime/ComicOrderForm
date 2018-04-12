@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ComicOrders.WPF.ViewModels {
     public class CustomerAddEditViewModel : BaseViewModel {
@@ -21,8 +22,8 @@ namespace ComicOrders.WPF.ViewModels {
         #endregion
 
         #region Commands
-        private RelayCommand<object, object> _save;
-        public RelayCommand<object, object> Save {
+        private RelayCommand<Window, object> _save;
+        public RelayCommand<Window, object> Save {
             get => _save;
             set {
                 _save = value;
@@ -40,7 +41,7 @@ namespace ComicOrders.WPF.ViewModels {
         }
         #endregion
 
-        private bool isEdit;
+        private readonly bool isEdit;
 
         #region Constructors
         private CustomerAddEditViewModel(bool isEdit) {
@@ -58,14 +59,13 @@ namespace ComicOrders.WPF.ViewModels {
         #endregion
 
         private void initializeCommands() {
-            Save = new RelayCommand<object, object>(o => {
+            Save = new RelayCommand<Window, object>(o => {
                 if(isEdit) DbUtil.Update(Customer);
                 else DbUtil.Insert(Customer);
-            }, o => {
-                return  !String.IsNullOrWhiteSpace(Customer.FirstName) &&
-                        !String.IsNullOrWhiteSpace(Customer.LastName) &&
-                        !String.IsNullOrWhiteSpace(Customer.Email);
-            });
+                o.Close();
+            }, o => !String.IsNullOrWhiteSpace(Customer.FirstName) &&
+                    !String.IsNullOrWhiteSpace(Customer.LastName) &&
+                    !String.IsNullOrWhiteSpace(Customer.Email));
         }
     }
 }

@@ -3,6 +3,7 @@ using ComicOrders.DB.Models;
 using ComicOrders.Lib;
 using ComicOrders.WPF.Views;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,6 +27,16 @@ namespace ComicOrders.WPF.ViewModels {
             get => _selectedCustomer;
             set {
                 _selectedCustomer = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private IList _selectedCustomers = new ArrayList();
+        public IList SelectedCustomers {
+            get => _selectedCustomers;
+            set {
+                _selectedCustomers = value;
                 OnPropertyChanged();
             }
         }

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:custctrl="clr-namespace:ComicOrders.WPF.CustomControls"
         xmlns:local="clr-namespace:ComicOrders.WPF.Views"
         mc:Ignorable="d"
         Title="Customers" Height="450" Width="800" Style="{DynamicResource DefaultWinStyle}">
@@ -14,12 +15,12 @@
                 <Button Content="Delete Selected Customers" Command="{Binding DeleteSelectedCustomers}"/>
             </StackPanel>
         </ScrollViewer>
-        <DataGrid DockPanel.Dock="Right" ItemsSource="{Binding Customers}" CanUserAddRows="False" CanUserDeleteRows="False" SelectedItem="{Binding SelectedCustomer}" IsReadOnly="True">
+        <custctrl:MultiSelectGrid DockPanel.Dock="Right" ItemsSource="{Binding Customers}" CanUserAddRows="False" CanUserDeleteRows="False" SelectedItemsList="{Binding SelectedCustomers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name"/>
                 <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name"/>
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
             </DataGrid.Columns>-->
-        </DataGrid>
+        </custctrl:MultiSelectGrid>
     </DockPanel>
 </Window>

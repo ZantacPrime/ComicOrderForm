@@ -87,6 +87,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomControls\MultiSelectGrid.cs" />
     <Compile Include="Helpers\Converters\OrderToDateConverter.cs" />
     <Compile Include="Models\OrderDisplayModel.cs" />
     <Compile Include="ViewModels\BaseView.cs" />
