@@ -1,5 +1,7 @@
 ﻿using Dapper.Contrib.Extensions;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace ComicOrders.DB.Models {
     [Table("Comics")]
@@ -13,7 +15,7 @@ namespace ComicOrders.DB.Models {
         public bool IsVariant { get; set; }
         public long? NonVariantComicId { get; set; }
         public long? SeriesId { get; set; }
-        public int ReleaseMonth { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
         public static int TableOrder() {
             return 1;
@@ -28,12 +30,21 @@ namespace ComicOrders.DB.Models {
                                             IsVariant BOOLEAN,
                                             NonVariantComicId INT,
                                             SeriesId INT,
-                                            ReleaseMonth INT NOT NULL
+                                            ReleaseDate DATE NOT NULL
                     )";
         }
 
         public override string ToString() {
             return Title ?? DiamondCode;
         }
+
+        public bool HasRequiredFields() {
+            return !String.IsNullOrWhiteSpace(Title) &&
+                !String.IsNullOrWhiteSpace(DiamondCode) &&
+                //!String.IsNullOrWhiteSpace(IssueNumber) &&
+                ReleaseDate != default(DateTime);
+        }
+
+        //public static List<ComicModel> GetComics(string NameFilter = null, PropertyInfo )
     }
 }

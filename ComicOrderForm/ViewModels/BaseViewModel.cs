@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ComicOrders.WPF.ViewModels {
-    public class BaseViewModel : INotifyPropertyChanged {
+    public abstract class BaseViewModel : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = "") {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
+        public abstract string Title { get; }
     }
 }

@@ -2,17 +2,16 @@
 using ComicOrders.DB.Models;
 using ComicOrders.Lib;
 using ComicOrders.WPF.Views;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace ComicOrders.WPF.ViewModels {
     public class CustomersViewModel : BaseViewModel {
         #region Properties
+        public override string Title => "Customers";
+
         private ObservableCollection<CustomerModel> _customers;
         public ObservableCollection<CustomerModel> Customers {
             get => _customers;
@@ -22,17 +21,7 @@ namespace ComicOrders.WPF.ViewModels {
             }
         }
 
-        private CustomerModel _selectedCustomer;
-        private CustomerModel SelectedCustomer {
-            get => _selectedCustomer;
-            set {
-                _selectedCustomer = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private IList _selectedCustomers = new ArrayList();
+       private IList _selectedCustomers = new ArrayList();
         public IList SelectedCustomers {
             get => _selectedCustomers;
             set {
@@ -87,15 +76,19 @@ namespace ComicOrders.WPF.ViewModels {
             });
 
             EditSelectedCustomer = new RelayCommand<object, object>(o => {
-                new CustomerAddEditView(SelectedCustomer.Id).ShowDialog();
+                new CustomerAddEditView(((CustomerModel)SelectedCustomers[0]).Id).ShowDialog();
                 populateCustomers();
-            }, o => SelectedCustomer != null);
+            }, o => SelectedCustomers.Count == 1);
 
             RemoveSelectedCustomers = new RelayCommand<object, object>(o => {
                 //Confirm
+                var confirmBox = MessageBox.Show("Are you sure you want to remove these customers?", "Delete Customers", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 //Delete
+                if(confirmBox == MessageBoxResult.OK)
+                    DbUtil.Delete(SelectedCustomers.Cast<CustomerModel>().ToList());
+                
                 populateCustomers();
-            }, o => SelectedCustomer != null);
+            }, o => SelectedCustomers.Count > 0);
         }
     }
 }

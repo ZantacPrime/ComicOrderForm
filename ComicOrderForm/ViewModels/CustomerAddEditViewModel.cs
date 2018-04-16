@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace ComicOrders.WPF.ViewModels {
-    public class CustomerAddEditViewModel : BaseViewModel {
+    public class CustomerAddEditViewModel : BaseViewModel,IAddEditViewModel {
         #region Properties
         private CustomerModel _customer;
         public CustomerModel Customer {
@@ -19,6 +19,11 @@ namespace ComicOrders.WPF.ViewModels {
                 OnPropertyChanged();
             }
         }
+
+        public override string Title { get {
+                if(isEdit) return "Edit Customer";
+                return "Add Customer";
+            } }
         #endregion
 
         #region Commands
@@ -31,8 +36,8 @@ namespace ComicOrders.WPF.ViewModels {
             }
         }
 
-        private RelayCommand<object> _cancel;
-        public RelayCommand<object> Cancel {
+        private RelayCommand<Window> _cancel;
+        public RelayCommand<Window> Cancel {
             get => _cancel;
             set {
                 _cancel = value;
@@ -41,7 +46,7 @@ namespace ComicOrders.WPF.ViewModels {
         }
         #endregion
 
-        private readonly bool isEdit;
+        public bool isEdit { get; }
 
         #region Constructors
         private CustomerAddEditViewModel(bool isEdit) {
@@ -66,6 +71,10 @@ namespace ComicOrders.WPF.ViewModels {
             }, o => !String.IsNullOrWhiteSpace(Customer.FirstName) &&
                     !String.IsNullOrWhiteSpace(Customer.LastName) &&
                     !String.IsNullOrWhiteSpace(Customer.Email));
+
+            Cancel = new RelayCommand<Window>(w => w.Close());
         }
+
+
     }
 }

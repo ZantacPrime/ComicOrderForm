@@ -1,5 +1,6 @@
 ﻿using ComicOrders.WPF.ViewModels;
 using System.Windows;
+using ComicOrders.WPF;
 
 namespace ComicOrders.WPF.Views {
     /// <summary>

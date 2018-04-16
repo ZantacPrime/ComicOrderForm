@@ -4,10 +4,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ComicOrders.WPF.Views"
+        xmlns:local="clr-namespace:ComicOrders.WPF"
+        xmlns:custctrl="clr-namespace:ComicOrders.WPF.CustomControls"
+        xmlns:help="clr-namespace:ComicOrders.WPF.Helpers.Converters"
         mc:Ignorable="d"
-        Title="ComicsView" Height="450" Width="800"  Style="{DynamicResource DefaultWinStyle}">
-    <Grid>
-        
-    </Grid>
+        Title="{Binding Title}" Height="450" Width="800"  Style="{DynamicResource DefaultWinStyle}">
+    <DockPanel>
+        <ScrollViewer DockPanel.Dock="Left">
+            <StackPanel >
+                <Button Content="Add Comic" Command="{Binding AddComic}"/>
+                <Button Content="Edit Selected Comic" Command="{Binding EditSelectedComic}"/>
+                <Button Content="Delete Selected Comics" Command="{Binding DeleteSelectedComics}"/>
+            </StackPanel>
+        </ScrollViewer>
+        <DockPanel DockPanel.Dock="Right">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Label Content="Filter:"/>
+                <TextBox Text="{Binding Filter}" DockPanel.Dock="Top" Width="100" Margin="2"/>
+            </StackPanel>
+            <custctrl:MultiSelectGrid DockPanel.Dock="Bottom" Grid.ColumnSpan="2" ItemsSource="{Binding Comics}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectedItem="{Binding SelectedCustomer}" SelectedItemsList="{Binding SelectedCustomers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="1">
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding EditSelectedComic}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.Resources>
+                    <!--<ContextMenu x:Key="RowMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="Copy Id" Command="{Binding CopyCommand}" CommandParameter="{Binding ID, Converter={StaticResource ToStringConverter}}"/>
+                    <MenuItem Header="Toggle Enabled" Command="{Binding ToggleCommand}">
+                        <MenuItem.CommandParameter>
+                            <MultiBinding Converter="{StaticResource ToggleModelConverter}">
+                                <Binding Path="DataContext.SelectedServer" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}"/>
+                                <Binding Source="{x:Static localhelp:DbUtil.SmartUsers}"/>
+                                <Binding Path="ID"/>
+                            </MultiBinding>
+                        </MenuItem.CommandParameter>
+                    </MenuItem>
+                </ContextMenu>-->
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Title}" Header="Title"/>
+                    <DataGridTextColumn Binding="{Binding DiamondCode}" Header="DiamonCode"/>
+                    <DataGridTextColumn Binding="{Binding IssueNumber}" Header="Issue number"/>
+                    <DataGridTextColumn Binding="{Binding RetailCost, Converter={StaticResource PrettyCostConverter}}" Header="Retail Cost"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsVariant}" Header="Is variant?"/>
+                </DataGrid.Columns>
+            </custctrl:MultiSelectGrid>
+        </DockPanel>
+    </DockPanel>
 </Window>

@@ -15,6 +15,8 @@ namespace ComicOrders.WPF.ViewModels {
     public class OrdersViewModel : BaseViewModel {
 
         #region Properties
+        public override string Title => "Comic Orders - Special Pickle Edition";
+
         private ObservableCollection<OrderDisplayModel> _orders;
         public ObservableCollection<OrderDisplayModel> Orders {
             get => _orders;

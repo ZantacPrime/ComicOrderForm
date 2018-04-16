@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComicOrders.WPF.Views"
         mc:Ignorable="d"
-        Title="CustomerAddEdit" MinHeight="185" MinWidth="300" Height="185" Width="300">
+        Title="{Binding Title}" MinHeight="185" MinWidth="300" Height="185" Width="300">
     <Grid>
         <Grid.Resources>
             <Style TargetType="{x:Type TextBox}">
@@ -35,7 +35,7 @@
         <TextBox Text="{Binding Customer.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"/>
 
         <Label Content="Is A Lenny:" Grid.Row="3" Grid.Column="0"/>
-        <CheckBox Content="{Binding Customer.IsLenny, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"/>
+        <CheckBox IsChecked="{Binding Customer.IsLenny}" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0">
             <Button Content="Save" Command="{Binding Save}" CommandParameter="{Binding ElementName=customerAddEditWindow}"/>

@@ -141,5 +141,13 @@ namespace ComicOrders.DB {
         public static long Insert<T>(T Model) where T : class {
             using(var cn = GetDefaultConnection()) return cn.Insert<T>(Model);
         }
+
+        public static bool Delete<T>(T Model) where T: class {
+            using(var cn = GetDefaultConnection()) return cn.Delete(Model);
+        }
+
+        public static bool Delete<T>(List<T> Models) where T: class {
+            using(var cn = GetDefaultConnection()) return cn.Delete(Models);
+        }
     }
 }
