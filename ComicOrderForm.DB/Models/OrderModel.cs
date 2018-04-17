@@ -22,9 +22,9 @@ namespace ComicOrders.DB.Models {
                                             ComicId int not null, 
                                             CustomerId int not null,
                                             OrderMonth DATE not null,
-                                            FOREIGN KEY(ComicId) REFERENCES Comics(Id),
-                                            FOREIGN KEY(CustomerId) REFERENCES Customers(Id)
-            )";
+                                            FOREIGN KEY(ComicId) REFERENCES Comics(Id) ON DELETE CASCADE,
+                                            FOREIGN KEY(CustomerId) REFERENCES Customers(Id) ON DELETE CASCADE
+            )";//We'll cascade the foreign keys as you cannot have an order without a Comic or Customer.
         }
 
         //public override string ToString() {

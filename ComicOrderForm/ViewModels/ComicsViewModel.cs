@@ -9,7 +9,7 @@ using System.Windows;
 using System.Reflection;
 
 namespace ComicOrders.WPF.ViewModels {
-    public class ComicsViewModel:BaseViewModel {
+    public class ComicsViewModel : BaseViewModel {
         #region Properties
         public override string Title => "Comics";
 
@@ -63,12 +63,30 @@ namespace ComicOrders.WPF.ViewModels {
 
         public ComicsViewModel() {
             initializeCommands();
+            populateComics();
         }
 
         private void initializeCommands() {
             AddComic = new RelayCommand<object>(o => {
-
+                new ComicsAddEditView().ShowDialog();
+                populateComics();
             });
+
+            EditSelectedComic = new RelayCommand<object, object>(o => {
+                new ComicsAddEditView(((ComicModel)SelectedComics[0]).Id).ShowDialog();
+                populateComics();
+            }, o => {
+                return SelectedComics.Count == 1;
+            });
+        
+
+            RemoveSelectedComics = new RelayCommand<object, object>(o => {
+                var confirmBox = MessageBox.Show("Are you sure you want to remove these comics? This will remove any orders associated with that comic as well.", "Delete Comics", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if(confirmBox == MessageBoxResult.OK)
+                    DbUtil.Delete(SelectedComics.Cast<ComicModel>().ToList());
+
+                populateComics();
+            }, o => SelectedComics.Count > 0);
         }
 
         private void populateComics(PropertyInfo Property = null) {

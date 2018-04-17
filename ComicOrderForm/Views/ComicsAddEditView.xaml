@@ -32,8 +32,8 @@
         <Label Foreground="Red" Content="Title:" Grid.Row="0" Grid.Column="0"/>
         <TextBox Text="{Binding Comic.Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1"/>
 
-        <Label Foreground="Red" Content="Last Name:" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Text="{Binding Comic.DiamonCode, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+        <Label Foreground="Red" Content="Diamond Code:" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Text="{Binding Comic.DiamondCode, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
 
         <Label Content="Issue Number:" Grid.Row="2" Grid.Column="0"/>
         <TextBox Text="{Binding Comic.IssueNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1"/>
@@ -55,7 +55,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="2" Grid.Column="0">
             <Button Content="Save" Command="{Binding Save}" CommandParameter="{Binding ElementName=comicsAddEditWindow}"/>
-            <Button Content="Cancel" Click="{Binding Cancel}" CommandParameter="{Binding ElementName=comicsAddEditWindow}"/>
+            <Button Content="Cancel" Command="{Binding Cancel}" CommandParameter="{Binding ElementName=comicsAddEditWindow}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -69,9 +69,8 @@ namespace ComicOrders.WPF.ViewModels {
                 w.Close();
             }, o => Comic.HasRequiredFields());
 
-            Cancel = new RelayCommand<Window>(w => {
-                w.Close();
-            });
+            
+            Cancel = new RelayCommand<Window>(w => w.Close());
         }
     }
 }

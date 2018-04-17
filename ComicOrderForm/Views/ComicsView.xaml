@@ -14,7 +14,7 @@
             <StackPanel >
                 <Button Content="Add Comic" Command="{Binding AddComic}"/>
                 <Button Content="Edit Selected Comic" Command="{Binding EditSelectedComic}"/>
-                <Button Content="Delete Selected Comics" Command="{Binding DeleteSelectedComics}"/>
+                <Button Content="Delete Selected Comics" Command="{Binding RemoveSelectedComics}"/>
             </StackPanel>
         </ScrollViewer>
         <DockPanel DockPanel.Dock="Right">
@@ -22,7 +22,7 @@
                 <Label Content="Filter:"/>
                 <TextBox Text="{Binding Filter}" DockPanel.Dock="Top" Width="100" Margin="2"/>
             </StackPanel>
-            <custctrl:MultiSelectGrid DockPanel.Dock="Bottom" Grid.ColumnSpan="2" ItemsSource="{Binding Comics}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectedItem="{Binding SelectedCustomer}" SelectedItemsList="{Binding SelectedCustomers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="1">
+            <custctrl:MultiSelectGrid DockPanel.Dock="Bottom" Grid.ColumnSpan="2" ItemsSource="{Binding Comics}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"  SelectedItemsList="{Binding SelectedComics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="1">
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding EditSelectedComic}"/>
                 </DataGrid.InputBindings>

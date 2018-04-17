@@ -82,7 +82,7 @@ namespace ComicOrders.WPF.ViewModels {
 
             RemoveSelectedCustomers = new RelayCommand<object, object>(o => {
                 //Confirm
-                var confirmBox = MessageBox.Show("Are you sure you want to remove these customers?", "Delete Customers", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                var confirmBox = MessageBox.Show("Are you sure you want to remove these customers? This will remove any orders associated with that customer as well.", "Delete Customers", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 //Delete
                 if(confirmBox == MessageBoxResult.OK)
                     DbUtil.Delete(SelectedCustomers.Cast<CustomerModel>().ToList());
