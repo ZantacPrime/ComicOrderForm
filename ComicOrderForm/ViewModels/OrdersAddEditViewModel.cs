@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,42 +9,77 @@ using ComicOrders.DB.Models;
 using ComicOrders.Lib;
 
 namespace ComicOrders.WPF.ViewModels {
-    class OrdersAddEditViewModel : BaseViewModel, IAddEditViewModel {
-        private OrderModel _order;
-        public OrderModel Order {
-            get => Order;
+    public class OrdersAddEditViewModel : BaseViewModel {
+        #region Properties
+        private ObservableCollection<DateTime> _orderMonths;
+        public ObservableCollection<DateTime> OrderMonths {
+            get => _orderMonths;
             set {
-                _order = value;
+                _orderMonths = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool isEdit { get; }
-
-        private RelayCommand<Window> _cancel;
-        public RelayCommand<Window> Cancel {
-            get => _cancel;
+        private DateTime? _selectedMonth;
+        public DateTime? SelectedMonth {
+            get => _selectedMonth;
             set {
-                _cancel = value;
+                _selectedMonth = value;
                 OnPropertyChanged();
             }
         }
 
-        private RelayCommand<Window, object> _save;
-        public RelayCommand<Window, object> Save {
-            get => _save;
+        private ObservableCollection<ComicModel> _availableComics;
+        public ObservableCollection<ComicModel> AvailableComics {
+            get { return _availableComics; }
             set {
-                _save = value;
+                _availableComics = value;
                 OnPropertyChanged();
             }
         }
 
-        public override string Title {
-            get {
-                if(isEdit) return "Edit Order";
-                return "Add Order";
+        private ComicModel _selectedComic;
+        public ComicModel SelectedComic {
+            get { return _selectedComic; }
+            set {
+                _selectedComic = value;
+                OnPropertyChanged();
             }
         }
+
+
+        private ObservableCollection<CustomerModel> _availableCustomers;
+        public ObservableCollection<CustomerModel> AvailableCustomers {
+            get { return _availableCustomers; }
+            set {
+                _availableCustomers = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
+
+
+        private RelayCommand<object, object> _add;
+        public RelayCommand<object, object> Add {
+            get => _add;
+            set {
+                _add = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private RelayCommand<object, object> _remove;
+        public RelayCommand<object, object> Remove {
+            get => _remove;
+            set {
+                _remove = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public override string Title => "Order Editor";
 
     }
 }

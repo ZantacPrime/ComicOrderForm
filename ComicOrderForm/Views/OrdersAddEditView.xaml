@@ -5,8 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComicOrders.WPF.Views"
         mc:Ignorable="d"
-        Title="OrdersAddEditView" Height="450" Width="800">
+        Title="{Binding Title}" Height="350" MinHeight="350"  Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Label Content="Order Month:"/>
+            <ComboBox Margin="2" ItemsSource="{Binding OrderMonths}" SelectedItem="{Binding SelectedMonth}" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource PrettyOrderDateConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label Margin="5,0,0,0" Content="Comic:"/>
+            <ComboBox ItemsSource="{Binding AvailableComics}" SelectedItem="{Binding SelectedComic}"/>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Column="0">
+                <Label Content="Available Customers" DockPanel.Dock="Top"/>
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <ListBox MinHeight="250"  ItemsSource="{Binding AvailableCustomers}" DockPanel.Dock="Bottom" SelectionMode="Multiple"/>
+                </ScrollViewer>
+            </DockPanel>
+            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="2,50,2,0">
+                <Button Content="Add" Command="{Binding RemoveSelectedOrders}" Margin="0,0,0,2"/>
+                <Button Content="Remove" Command="{Binding AddSelectedOrders}"/>
+            </StackPanel>
+            <DockPanel Grid.Column="2">
+                <Label Content="Customers with Order" DockPanel.Dock="Top"/>
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <ListBox ItemsSource="{Binding OrderedCustomers}" DockPanel.Dock="Bottom" SelectionMode="Multiple"/>
+                </ScrollViewer>
+            </DockPanel>
+
+        </Grid>
     </Grid>
 </Window>
